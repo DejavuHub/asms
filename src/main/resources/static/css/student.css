@@ -1,0 +1,144 @@
+body{
+    color: white;
+}
+button{
+    border: none;
+    color: white;
+}
+div{
+    margin: 0;
+}
+.inline{
+    display: inline-block;
+}
+.studenthead{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(245,125,49);
+    padding: 10px;
+}
+.studentbody{
+    position: absolute;
+    top: 135.33px;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(to bottom,rgb(245,125,49),rgb(255,248,220));
+}
+.studentbody>ul{
+    list-style: none;
+    padding: 0;
+}
+.studentbody>ul>li{
+    background-color: rgb(247,127,51);
+    margin: 20px;
+    margin-top: 0;
+    width: 80%;
+    height: 50px;
+    padding-left: 20px;
+    line-height: 50px;
+}
+.studentbody>ul>li>img{
+    position: relative;
+    top: 20%;
+}
+.studentcontent{
+    position: absolute;
+    top: 135.33px;
+    left: 300px;
+    width: 100%;
+    height: 100%;
+}
+.studentcontent img{
+    margin: 25px 0;
+}
+.symbol1{
+    background-color: rgb(249,166,114);
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+}
+.symbol2{
+    background-color: rgb(252,205,149);
+    position: absolute;
+    top: 50px;
+    left: 410px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+}
+.symbol3{
+    background-color: rgb(155,201,155);
+    position: absolute;
+    top: 260px;
+    left: 100px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+}
+.symbol4{
+    background-color: rgb(177,207,207);
+    position: absolute;
+    top: 260px;
+    left: 410px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+}
+.logindiv{
+    position: absolute;
+    top: 50%;
+    right: 5%;
+}
+.logindiv>button{
+    margin:0 10px;
+    background-color: rgb(250,179,132);
+    border-radius: 10px;
+    width: 120px;
+}
+.english{
+    font-size: 12px;
+}
+.stuproready{
+    border:1px solid rgb(154,154,154);
+    margin:0;
+    position:absolute;
+    top:50px;
+    width:100px;
+    height:40.67px;
+    border-radius:5px 5px 0 0;
+    border-bottom:none;
+}
+.stuproapply{
+    border:1px solid rgb(154,154,154);
+    position:absolute;
+    top:50px;
+    left:100px;
+    width:100px;
+    height:40.67px;
+    border-radius:5px 5px 0 0;
+    border-bottom:none;
+}
+.noborder{
+    border:none;
+    border-bottom:1px solid rgb(154,154,154);
+}
+.grey{
+    color:grey;
+}
+.stuproconditions>label{
+    margin:0 10px;
+}
+.stuproconditions>button{
+    margin:0 10px;
+}
+table td{
+    border:1px solid black;
+    text-align:center;
+    padding:10px;
+}

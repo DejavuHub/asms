@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asms.dao.LoginDAO">
+    <select id="findUser" resultMap="userMap">
+        select sys_user.*,sys_role.role_name,sys_department.department_name
+        from sys_user
+        inner join sys_role on sys_user.role=sys_role.role_id
+        left join sys_department on sys_user.department_id=sys_department.department_id
+        where user_account=#{username} and userpass=#{password}
+    </select>
+    <resultMap id="userMap" type="User">
+        <id column="userid" property="id"/>
+        <result column="user_account" property="account"/>
+        <result column="username" property="username"/>
+        <result column="userpass" property="password"/>
+        <result column="user_status" property="status"/>
+        <result column="telphone" property="telephone"/>
+        <result column="email" property="email"/>
+        <result column="idno" property="idno"/>
+        <result column="title" property="title"/>
+        <result column="sex" property="sex"/>
+        <result column="head" property="head"/>
+        <result column="createid" property="createid"/>
+        <result column="updateid" property="updateid"/>
+        <result column="updatetime" property="updatetime"/>
+        <result column="createtime" property="createtime"/>
+        <association property="department" column="department_id" javaType="Department">
+            <id column="department_id" property="id"/>
+            <result column="department_name" property="name"/>
+        </association>
+        <association property="role" column="role" javaType="Role">
+            <id column="role_id" property="id"/>
+            <result column="role_name" property="name"/>
+        </association>
+    </resultMap>
+</mapper>

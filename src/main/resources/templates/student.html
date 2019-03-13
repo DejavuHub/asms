@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<link href="/css/student.css" rel="stylesheet"/>
+<body>
+    <input class="id" type="hidden" th:value="${session.user.id}"/>
+    <div class="studenthead">
+        <img src="/img/asmsfour.png"/>
+        <div class="inline">
+            <h1>动物科技学院创新与实践管理平台</h1>
+            <p class="english">Innovation and practice management platform of the Institute of animal science and technology</p>
+        </div>
+        <div class="logindiv">
+            <label th:text="${session.user.username}"></label>，您好
+            <button type="button" onclick="updatepwd()">修改密码</button>
+            <button type="button" onclick="logout()">退出</button>
+        </div>
+    </div>
+    <div class="studentbody">
+        <ul>
+            <li style="background-color: rgb(231,119,47)"><img src="/img/security_cockpit.png"/>首页</li>
+            <li><img src="/img/security_cockpit.png"/>我的科研项目</li>
+            <li><img src="/img/security_cockpit.png"/>我的毕业设计</li>
+            <li><img src="/img/security_cockpit.png"/>我的成果</li>
+            <li>内容发布<img src="/img/arrowr.png" style="position: relative;left: 55%;top: 10%;height: 20px;"/></li>
+            <li><img src="/img/security_cockpit.png"/>我的提问</li>
+            <li><img src="/img/security_cockpit.png"/>我的基本信息</li>
+        </ul>
+    </div>
+    <div class="studentcontent">
+
+    </div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/student.js"></script>
+</html>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asms.dao.StudentDAO">
+    <select id="findApplyCount" resultType="int">
+        select count(1) from tbl_project,sys_code
+        where  tbl_project.status=sys_code.uuid
+        and sys_code.code_name='报名中'
+    </select>
+    <select id="findMaterialCount" resultType="int">
+        select count(1) from tbl_student_project,sys_code
+        where tbl_student_project.student_status=sys_code.uuid
+        and sys_code.code_name='材料待提交'
+        and tbl_student_project.student_id=#{studentid}
+    </select>
+    <select id="findDeadlineCount" resultType="int">
+        select count(1) from tbl_project
+        where timestampdiff(day,#{nowdate},deadline)=0
+    </select>
+    <select id="findDesignCount" resultType="int">
+        select count(1) from tbl_graduation_design,sys_code
+        where tbl_graduation_design.status=sys_code.uuid
+        and tbl_graduation_design.student_id=#{studentid}
+        and sys_code.code_name='材料待修改'
+    </select>
+    <select id="findProjectTypes" resultType="Dictionary">
+        select uuid id,code_name name from sys_code where father_name='科研项目类型'
+    </select>
+    <select id="findProjectStages" resultType="Dictionary">
+        select uuid id,code_name name from sys_code where father_name='科研项目进行阶段'
+    </select>
+    <select id="findStudentProjectStatus" resultType="Dictionary">
+        select uuid id,code_name name from sys_code where father_name='学生项目状态'
+    </select>
+    <select id="findProjectStatus" resultType="Dictionary">
+        select uuid id,code_name name from sys_code where father_name='项目状态'
+    </select>
+    <select id="findProjectsByConditions" resultType="Project">
+        select tbl_project.project_name projectname,
+        tbl_project.start_time starttime,
+        data1.code_name projecttypename,
+        data2.code_name projectstagename,
+        tbl_teacher.teacher_name teachername,
+        data3.code_name mystatusname,
+        data4.code_name projectstatusname
+        from tbl_project
+        inner join sys_code data1 on data1.uuid=tbl_project.project_type
+        inner join sys_code data2 on data2.uuid=tbl_project.project_stage
+        inner join tbl_teacher on tbl_teacher.id=tbl_project.teacher_id
+        inner join tbl_student_project on tbl_student_project.project_id=tbl_project.id
+        inner join sys_user on tbl_student_project.student_id=sys_user.userid
+        inner join sys_code data3 on data3.uuid=tbl_student_project.student_status
+        inner join sys_code data4 on data4.uuid=tbl_project.status
+        where tbl_project.project_name like #{projectname}
+        <if test="studentid!=null">
+            and sys_user.userid=#{studentid}
+            <if test="mystatus!='0'.toString()">
+                and tbl_student_project.student_status=#{mystatus}
+            </if>
+        </if>
+        <if test="projecttype!='0'.toString()">
+            and tbl_project.project_type=#{projecttype}
+        </if>
+        <if test="projectstage!='0'.toString()">
+            and tbl_project.project_stage=#{projectstage}
+        </if>
+        <if test="projectstatus!=null and projectstatus!='0'.toString()">
+            and tbl_project.status=#{projectstatus}
+        </if>
+        limit #{index},#{rows}
+    </select>
+    <select id="findProjectCountByConditions" resultType="int">
+        select count(1) from tbl_project where tbl_project.project_name like #{projectname}
+        <if test="studentid!=null">
+            and id in
+            (select project_id from tbl_student_project where student_id=#{studentid}
+            <if test="mystatus!='0'.toString()">
+                and student_status=#{mystatus}
+            </if>
+            )
+        </if>
+        <if test="projecttype!='0'.toString()">
+            and tbl_project.project_type=#{projecttype}
+        </if>
+        <if test="projectstage!='0'.toString()">
+            and tbl_project.project_stage=#{projectstage}
+        </if>
+        <if test="projectstatus!=null and projectstatus!='0'.toString()">
+            and tbl_project.status=#{projectstatus}
+        </if>
+    </select>
+</mapper>
